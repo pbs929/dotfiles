@@ -9,27 +9,16 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Shortcuts
-alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
+
+# git
 alias g="git"
 alias gcm="git checkout master"
 alias gcd="git checkout develop"
 alias gmm="git merge master"
 alias gmd="git merge develop"
-alias hbd="hammer build -e development"
-alias hdd="hammer deploy -e development"
-alias hbs="hammer build -e staging"
-alias hds="hammer deploy -e staging"
-alias hbp="hammer build -e production"
-alias hdp="hammer deploy -e production"
-alias ds102="ssh data-science-102.optiturn.com"
-
-# triton stuff
-alias teu='eval "$(triton env -u)"'
-alias tep='eval "$(triton env production_data_science)"'
-alias tes='eval "$(triton env staging_data_science)"'
 
 # Detect which `ls` flavor is in use
 # if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -69,38 +58,6 @@ alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup
 
 # Google Chrome
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
-alias canary='/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary'
-
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en0"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-
-# Show active network interfaces
-alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
-
-# Flush Directory Service cache
-alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
-
-# Clean up LaunchServices to remove duplicates in the “Open With” menu
-alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
-# Canonical hex dump; some systems have this symlinked
-command -v hd > /dev/null || alias hd="hexdump -C"
-
-# macOS has no `md5sum`, so use `md5` as a fallback
-command -v md5sum > /dev/null || alias md5sum="md5"
-
-# macOS has no `sha1sum`, so use `shasum` as a fallback
-command -v sha1sum > /dev/null || alias sha1sum="shasum"
-
-# JavaScriptCore REPL
-jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc";
-[ -e "${jscbin}" ] && alias jsc="${jscbin}";
-unset jscbin;
-
-# Trim new lines and copy to clipboard
-alias c="tr -d '\n' | pbcopy"
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
@@ -130,12 +87,6 @@ alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
 alias spoton="sudo mdutil -a -i on"
 
-# PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
-alias plistbuddy="/usr/libexec/PlistBuddy"
-
-# Airport CLI alias
-alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
-
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
 # find . -name .gitattributes | map dirname
@@ -145,9 +96,6 @@ alias map="xargs -n1"
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "${method}"="lwp-request -m '${method}'"
 done
-
-# Make Grunt print stack traces by default
-command -v grunt > /dev/null && alias grunt="grunt --stack"
 
 # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"

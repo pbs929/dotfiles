@@ -1,5 +1,6 @@
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
+export PATH="/usr/local/homebrew/bin:$PATH";
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -42,15 +43,16 @@ fi;
 
 # Add tab completion for `defaults read|write NSGlobalDomain`
 # You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults;
+# complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+# complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
-# Enable pyenv
+# # Enable pyenv
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"   # This is needed just for the `pyenv activate` command, but slows down the terminal
 
-# Enable rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# Set path for python 3.6
+# PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+# PATH="$HOME/Library/Python/3.6/bin:${PATH}"
+# export PATH

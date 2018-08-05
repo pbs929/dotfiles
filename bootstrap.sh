@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")";
+cd "$(dirname "$0")"
+DOTFILES_ROOT=$(pwd -P)
+echo $DOTFILES_ROOT
 
 # git pull origin master;
 
 function doIt() {
-	rsync --exclude ".git/" \
-		--exclude ".DS_Store" \
-		--exclude "osx.sh" \
-		--exclude "bootstrap.sh" \
-		--exclude "brew.sh" \
-		--exclude "README.md" \
-		--exclude "LICENSE-MIT.txt" \
-		-avh --no-perms . ~;
+	for name in .jupyter .aliases .bash_profile .bash_prompt .bashrc .exports .functions .gitconfig .hushlogin .inputrc .screenrc .tmux.conf .vimrc .wgetrc
+	do
+		rm -rf $HOME/$name || true
+		ln -s $DOTFILES_ROOT/$name $HOME/$name
 	source ~/.bash_profile;
+  done
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
